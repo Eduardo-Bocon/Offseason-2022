@@ -27,7 +27,7 @@ public class GrabBalls extends CommandBase {
 
   @Override
   public void execute(){
-    double rightTrigger = controllers.xboxController0.getRawAxis(XboxController.Axis.kRightTrigger.value);
+    double rightTrigger = controllers.xboxController1.getRawAxis(XboxController.Axis.kRightTrigger.value);
     if(rightTrigger > 0.3){
       intake.grabBalls(rightTrigger * 0.7);
     }else if(controllers.xboxController1.getRightBumper()){

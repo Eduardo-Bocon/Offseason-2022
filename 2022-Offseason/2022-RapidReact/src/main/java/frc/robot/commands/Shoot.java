@@ -4,21 +4,22 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+
 import frc.robot.Controllers;
 import frc.robot.subsystems.Shooter;
 
 public class Shoot extends CommandBase {
 
     private final Shooter shooter;
-    private Controllers controllers;
-    private boolean isActive = false;
-    private boolean justPressed = false;
-
-    public Shoot(Shooter shooter, Controllers controllers) {
+    private double speed;
+    
+    public Shoot(Shooter shooter, Controllers controllers, double speed) {
         addRequirements(shooter);
         this.shooter = shooter;
-        this.controllers = controllers;
+        this.speed = speed;
     }
 
     @Override
@@ -27,20 +28,7 @@ public class Shoot extends CommandBase {
 
     @Override
     public void execute() {
-        if (controllers.xboxController1.getRawAxis(3) > 0.2) {
-            if (!justPressed) {
-                isActive = !isActive;
-                justPressed = true;
-            }
-        } else {
-            justPressed = false;
-        }
-        
-        if (isActive) {
-            shooter.activate(0.8);
-        } else {
-            shooter.stop();
-        }
+            shooter.activate(speed);
     }
 
     @Override

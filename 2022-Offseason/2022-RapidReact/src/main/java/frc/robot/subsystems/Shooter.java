@@ -20,7 +20,7 @@ public class Shooter extends SubsystemBase {
 
     public void activate(double speed) {
         rightMotor.set(speed);
-        leftMotor.set(speed);
+        leftMotor.set(-speed);
     }
 
     public void stop() {

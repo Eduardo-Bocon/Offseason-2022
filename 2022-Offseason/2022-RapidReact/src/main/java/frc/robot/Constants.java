@@ -17,34 +17,37 @@ public final class Constants {
 
     public final class Shooter{
     // motors
-      public static final int RIGHT_MOTOR_ID = 30;
-      public static final int LEFT_MOTOR_ID = 31;
+      public static final int RIGHT_MOTOR_ID = 32;
+      public static final int LEFT_MOTOR_ID = 33;
     // speed
-      public static final double SPEED = 0.8;
+      public static final double SPEED = 1;
     // delay
       public static final double DELAY = 2;
     }
 
     public final class DriveTrain{
-    //motors
+    //motors+.
+    
       public static final int LEFT_MASTER_ID = 2;
       public static final int LEFT_SLAVE_ID = 1;
       public static final int RIGHT_MASTER_ID = 4;
       public static final int RIGHT_SLAVE_ID = 3;
+
+      public static final double SPEED = 0.69;
     }
 
     public final class Storage{
     // motors
       public static final int STRG_ID = 20;
     // speeds
-      public static final double SPEED = 0.8;
+      public static final double SPEED = -1;
     }
 
     public final class Intake{
     //motors
       public static final int MOTOR_ID = 10;
     // speed
-      public static final double MAX_SPEED = 0.7;
+      public static final double MAX_SPEED = 0.5;
       public static final double DEADBAND = 0.3;
     }
 

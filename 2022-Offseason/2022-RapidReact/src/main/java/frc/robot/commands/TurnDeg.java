@@ -28,7 +28,7 @@ public class TurnDeg extends CommandBase {
 
   @Override
   public void execute() {
-    driveTrain.arcadeDrive(0.0, speed);
+    driveTrain.arcadeDrive(speed, 0);
   }
 
   @Override
@@ -37,9 +37,10 @@ public class TurnDeg extends CommandBase {
   @Override
   public boolean isFinished() {
     if(angle >= 0){
-    return driveTrain.getGyro().getAngle()-startingAngle >= angle;
+      return driveTrain.getGyro().getAngle()-startingAngle >= angle;
     } else{
       return driveTrain.getGyro().getAngle()-startingAngle <= angle;
     }
+    
   }
 }

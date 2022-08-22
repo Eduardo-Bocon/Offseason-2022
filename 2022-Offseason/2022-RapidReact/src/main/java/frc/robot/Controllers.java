@@ -22,7 +22,7 @@ public class Controllers {
     public final JoystickButton rTrigger0 = new JoystickButton(xboxController0, XboxController.Button.kRightStick.value);
     public final JoystickButton lTrigger0 = new JoystickButton(xboxController0, XboxController.Button.kLeftStick.value);
     public final JoystickButton lBumper0 = new JoystickButton(xboxController0, XboxController.Button.kLeftBumper.value);
-    public final JoystickButton rBumper0 = new JoystickButton(xboxController0, XboxController.Button.kRightBumper.value);
+    public final JoystickButton rBumper0 = new JoystickButton(xboxController0, XboxController.Button.kLeftBumper.value);
     public final JoystickButton startButton0 = new JoystickButton(xboxController0, 6);
     public final JoystickButton selectButton0 = new JoystickButton(xboxController0, 7);
     public final POVButton X0_pov0 = new POVButton(xboxController0, 0);

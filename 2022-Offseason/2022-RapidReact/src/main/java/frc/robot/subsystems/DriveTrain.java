@@ -5,14 +5,11 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
-import org.opencv.core.Mat;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.RobotController;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.simulation.ADXRS450_GyroSim;
 import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
@@ -35,9 +32,6 @@ public class DriveTrain extends SubsystemBase {
   private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   private final ADXRS450_GyroSim gyroSim = new ADXRS450_GyroSim(gyro);
 
-  private double moveSpeed = 0.0;
-  private double rotateSpeed = 0.0;
-
   private boolean isInverted = true;
 
   public final Encoder rightEncoder = new Encoder(
@@ -53,7 +47,7 @@ public class DriveTrain extends SubsystemBase {
   private DifferentialDrivetrainSim driveSim = DifferentialDrivetrainSim.createKitbotSim(
     KitbotMotor.kDualCIMPerSide,
     KitbotGearing.k10p71,
-    KitbotWheelSize.SixInch,
+    KitbotWheelSize.kSixInch,
     null
   );
 
@@ -68,11 +62,13 @@ public class DriveTrain extends SubsystemBase {
     rightMaster.configFactoryDefault();
     rightSlave.configFactoryDefault();
 
-    SpeedControllerGroup LeftGroup = new SpeedControllerGroup(leftMaster, leftSlave);
-    SpeedControllerGroup RightGroup = new SpeedControllerGroup(rightMaster, rightSlave);
+    leftMaster.setVoltage(12);
+    leftSlave.setVoltage(12);
+    MotorControllerGroup RightGroup = new MotorControllerGroup(rightMaster, rightSlave);
+    MotorControllerGroup LeftGroup = new MotorControllerGroup(leftMaster, leftSlave);
 
-    differentialDrive = new DifferentialDrive( LeftGroup, RightGroup);
-
+    differentialDrive = new DifferentialDrive(LeftGroup, RightGroup);
+   
     leftEncoder.setDistancePerPulse(Constants.CONVERT_TO_DISTANCE);
     rightEncoder.setDistancePerPulse(Constants.CONVERT_TO_DISTANCE);
 
@@ -81,26 +77,10 @@ public class DriveTrain extends SubsystemBase {
 
   }
 
-  public void arcadeDrive (double moveSpeed, double rotateSpeed){
-    differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
-  }
-
-   /* public void arcadeDrive(double moveSpeed, double rotateSpeed){
-      if (moveSpeed > this.moveSpeed) {
-        this.moveSpeed += Math.min(Math.abs(moveSpeed-this.moveSpeed), 0.1);
-      } else if (moveSpeed < this.moveSpeed) {
-        this.moveSpeed -= Math.min(Math.abs(moveSpeed-this.moveSpeed), 0.08);
-      }
-
-      if (rotateSpeed > this.rotateSpeed) {
-        this.rotateSpeed += Math.min(Math.abs(rotateSpeed-this.rotateSpeed), 0.08);
-      } else if (rotateSpeed < this.rotateSpeed) {
-        this.rotateSpeed -= Math.min(Math.abs(rotateSpeed-this.rotateSpeed), 0.05);
-      }
-
-      differentialDrive.arcadeDrive(this.moveSpeed, this.rotateSpeed);
+    public void arcadeDrive(double moveSpeed, double rotateSpeed){
+      differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
     }
-*/
+
 
   public static double deadZone (double input){
     if(Math.abs(input) < 0.2){

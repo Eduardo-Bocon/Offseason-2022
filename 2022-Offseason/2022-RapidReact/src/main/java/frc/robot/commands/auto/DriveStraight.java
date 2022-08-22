@@ -40,7 +40,7 @@ public class DriveStraight extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    driveTrain.arcadeDrive(speed, 0);
+    driveTrain.arcadeDrive(0, speed);
   //   if (speed > 0){ 
   //  intake.grabBalls(Constants.Intake.MAX_SPEED);
   //   }

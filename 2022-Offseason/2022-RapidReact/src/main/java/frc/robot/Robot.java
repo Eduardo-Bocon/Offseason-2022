@@ -5,9 +5,17 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CameraServerJNI;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.MjpegServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.Shooter;
+import frc.robot.commands.Shoot;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -17,7 +25,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
     private Command m_autonomousCommand;
     private RobotContainer m_robotContainer;
-
+   
     /**
      * This function is run when the robot is first started up and should be used for any
      * initialization code.
@@ -26,9 +34,40 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
         // autonomous chooser on the dashboard.
-        //CameraServer.startAutomaticCapture(1);
         m_robotContainer = new RobotContainer();
-        CameraServer.startAutomaticCapture();
+        //CameraServer.getInstance().startAutomaticCapture("Camera 1", 1);
+        //CameraServer.getInstance().startAutomaticCapture("Camera 0", 0);
+        //CameraServer.startAutomaticCapture("usbCamera0", 0);  
+        CameraServer.startAutomaticCapture("usbCamera1", 1).setFPS(10);
+
+        //usb1.setResolution(1, 1);
+       // usb0.setResolution(1, 1);
+
+        
+        
+        // Thread visionThread = new Thread(
+        //     () -> {
+        //         UsbCamera camera = CameraServer.startAutomaticCapture();
+        //         CvSink cvSink = CameraServer.getVideo();
+        //         CvSource output = CameraServer.putVideo("Threshold", 600, 600);
+
+        //         Mat mat = new Mat();
+
+        //         while (!Thread.interrupted()) {
+        //             if (cvSink.grabFrame(mat) == 0) {
+        //                 output.notifyError(cvSink.getError());
+        //                 continue;
+        //             }
+
+        //             Imgproc.rectangle(
+        //                 mat, 
+        //                 new Point(0.0, 0.0),
+        //                 new Point(100.0, 100.0),
+        //                 new Scalar(255, 255, 255)
+        //             );
+        //         }
+        
+
     }
 
     /**
@@ -45,6 +84,7 @@ public class Robot extends TimedRobot {
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run();
+        
     }
 
     /**
@@ -95,6 +135,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
+       
     }
 
     @Override

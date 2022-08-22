@@ -7,6 +7,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.StorageSystem;
+import frc.robot.Constants;
 
 public class ActivateStorage extends CommandBase {
 
@@ -28,9 +29,9 @@ public class ActivateStorage extends CommandBase {
   public void execute(){
     double leftTrigger = xboxController.getRawAxis(XboxController.Axis.kLeftTrigger.value);
     if(leftTrigger > 0.3){
-      storageSystem.activate(leftTrigger * 0.7);
+      storageSystem.activate(leftTrigger * Constants.Storage.SPEED);
     }else if(xboxController.getLeftBumper()){
-      storageSystem.activate(-0.7);
+      storageSystem.activate(-Constants.Storage.SPEED);
     }else{
       storageSystem.activate(0);
     }

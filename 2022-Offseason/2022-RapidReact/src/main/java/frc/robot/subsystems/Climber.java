@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -17,7 +17,7 @@ public class Climber extends SubsystemBase {
   private final VictorSP downMaster = new VictorSP(Constants.Climber.DOWN_MASTER_ID);
   private final VictorSP downSlave = new VictorSP(Constants.Climber.DOWN_SLAVE_ID);
 
-  private final SpeedControllerGroup downGroup = new SpeedControllerGroup(downSlave, downMaster);
+  private final MotorControllerGroup downGroup = new MotorControllerGroup(downSlave, downMaster);
 
   public Climber() {
   }
